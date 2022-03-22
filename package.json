@@ -1,0 +1,19 @@
+{
+  "name": "kube-idp",
+  "version": "1.0.0",
+  "description": "A Kubernetes-based IDP",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbjydev/kube-idp.git"
+  },
+  "author": "Hayden Young <hayden@hbjy.dev> (https://hayden.moe)",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/hbjydev/kube-idp/issues"
+  },
+  "homepage": "https://github.com/hbjydev/kube-idp#readme"
+}
