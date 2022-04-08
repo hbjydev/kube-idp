@@ -18,6 +18,11 @@ func main() {
 	defer db.Db.Close()
 
 	http.HandleFunc(`/graphql`, func(w http.ResponseWriter, req *http.Request) {
+		addCors(&w, req)
+		if (*req).Method == "OPTIONS" {
+			return
+		}
+
 		var p dto.PostData
 		if err := json.NewDecoder(req.Body).Decode(&p); err != nil {
 			w.WriteHeader(400)
@@ -40,4 +45,10 @@ func main() {
 	log.Println(`server listening on *:8080`)
 
 	log.Fatal(http.ListenAndServe(`:8080`, nil))
+}
+
+func addCors(w *http.ResponseWriter, req *http.Request) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 }

@@ -1,0 +1,12 @@
+/* Tailwind Imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply flex flex-col min-h-screen w-full;
+}
+
+#app {
+  @apply flex flex-col flex-grow;
+}
