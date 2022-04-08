@@ -1,8 +1,6 @@
 package user
 
 import (
-	"log"
-
 	sq "github.com/Masterminds/squirrel"
 	"github.com/hbjydev/kube-idp/server/internal/constants"
 	"github.com/hbjydev/kube-idp/server/internal/db"
@@ -22,7 +20,6 @@ func (u *UserRepository) GetUserById(id string) (*User, error) {
 
 	rows := users.RunWith(db.Db).QueryRow()
 	if err := rows.Scan(&user.Id, &user.Login, &user.DisplayName, &user.Password, &user.Email, &user.CreatedAt, &user.UpdatedAt); err != nil {
-		log.Printf("error trying to query user by id: %v", err)
 		return nil, err
 	}
 
@@ -36,7 +33,6 @@ func (u *UserRepository) GetUserByLogin(login string) (*User, error) {
 
 	rows := users.RunWith(db.Db).QueryRow()
 	if err := rows.Scan(&user.Id, &user.Login, &user.DisplayName, &user.Password, &user.Email, &user.CreatedAt, &user.UpdatedAt); err != nil {
-		log.Printf("error trying to query user by id: %v", err)
 		return nil, err
 	}
 
@@ -51,8 +47,8 @@ func (u *UserRepository) CreateUser(user User) (*User, error) {
 
 	query := db.Qb.
 		Insert("users").
-		Columns("login", "email", "password").
-		Values(user.Login, user.Email, password).
+		Columns("login", "email", "password", "displayName").
+		Values(user.Login, user.Email, password, user.DisplayName).
 		Suffix(`returning "id", "createdat", "updatedat"`).
 		RunWith(db.Db)
 

@@ -9,8 +9,8 @@ import (
 type User struct {
 	Id          string         `json:"id"`
 	Login       string         `json:"login"`
-	DisplayName *db.NullString `json:"display_name,omitempty"`
-	Password    string         `json:"password,omitempty"`
+	DisplayName *db.NullString `json:"display_name"`
+	Password    string         `json:"password"`
 	Email       string         `json:"email"`
 
 	CreatedAt *time.Time `json:"created_at"`

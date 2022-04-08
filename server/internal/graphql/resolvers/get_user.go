@@ -21,7 +21,16 @@ var GetUser = &graphql.Field{
 
 		if isOK {
 			userRepo := user.CreateUserRepository()
-			return userRepo.GetUserByLogin(loginQuery)
+			u, err := userRepo.GetUserByLogin(loginQuery)
+
+			if err != nil {
+				if err.Error() == "sql: no rows in result set" {
+					return nil, nil
+				}
+				return nil, err
+			}
+
+			return u, nil
 		}
 
 		return user.User{}, nil
