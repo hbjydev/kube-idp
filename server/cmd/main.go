@@ -2,11 +2,12 @@ package main
 
 import (
 	"encoding/json"
+	"log"
+	"net/http"
+
 	"github.com/graphql-go/graphql"
 	"github.com/hbjydev/kube-idp/server/internal/dto"
 	schema "github.com/hbjydev/kube-idp/server/internal/graphql"
-	"log"
-	"net/http"
 )
 
 func main() {
