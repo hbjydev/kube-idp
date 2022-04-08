@@ -1,0 +1,12 @@
+---
+resources:
+  - pg-pvc.yaml
+  - pg-deployment.yaml
+  - pg-service.yaml
+
+configMapGenerator:
+  - name: pg-cfg
+    envs:
+      - pg.env
+
+namePrefix: idp-

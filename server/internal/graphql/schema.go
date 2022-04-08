@@ -8,10 +8,18 @@ import (
 var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 	Name: `RootQuery`,
 	Fields: graphql.Fields{
-		"user": resolvers.GetUser,
+		`user`: resolvers.GetUser,
+	},
+})
+
+var rootMutation = graphql.NewObject(graphql.ObjectConfig{
+	Name: `RootMutation`,
+	Fields: graphql.Fields{
+		`createUser`: resolvers.CreateUser,
 	},
 })
 
 var IdpSchema, _ = graphql.NewSchema(graphql.SchemaConfig{
-	Query: rootQuery,
+	Query:    rootQuery,
+	Mutation: rootMutation,
 })

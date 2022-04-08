@@ -5,12 +5,23 @@ import "github.com/graphql-go/graphql"
 var User = graphql.NewObject(graphql.ObjectConfig{
 	Name: `User`,
 	Fields: graphql.Fields{
-		"id": &graphql.Field{
+		`id`: &graphql.Field{
 			Type: graphql.String,
 		},
-		"username": &graphql.Field{
+		`login`: &graphql.Field{
 			Type: graphql.String,
+		},
+		`displayName`: &graphql.Field{
+			Type: graphql.String,
+		},
+		`email`: &graphql.Field{
+			Type: graphql.String,
+		},
+		`createdAt`: &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		`updatedAt`: &graphql.Field{
+			Type: graphql.DateTime,
 		},
 	},
 })
-

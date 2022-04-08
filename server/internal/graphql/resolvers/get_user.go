@@ -2,8 +2,8 @@ package resolvers
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/hbjydev/kube-idp/server/internal/dto"
 	"github.com/hbjydev/kube-idp/server/internal/graphql/types"
+	"github.com/hbjydev/kube-idp/server/internal/user"
 )
 
 var GetUser = &graphql.Field{
@@ -11,19 +11,19 @@ var GetUser = &graphql.Field{
 	Description: `Get single user`,
 
 	Args: graphql.FieldConfigArgument{
-		"id": &graphql.ArgumentConfig{
-			Type: graphql.String,
+		`login`: &graphql.ArgumentConfig{
+			Type: graphql.NewNonNull(graphql.String),
 		},
 	},
 
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-		idQuery, isOK := params.Args["id"].(string)
+		loginQuery, isOK := params.Args[`login`].(string)
 
 		if isOK {
-			// Search for el with id
-			return dto.User{Id: idQuery, Username: `Something`}, nil
+			userRepo := user.CreateUserRepository()
+			return userRepo.GetUserByLogin(loginQuery)
 		}
 
-		return dto.User{}, nil
+		return user.User{}, nil
 	},
 }
