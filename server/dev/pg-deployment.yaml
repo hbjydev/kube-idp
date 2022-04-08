@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg
+spec:
+  selector:
+    matchLabels:
+      app: pg
+  template:
+    metadata:
+      labels:
+        app: pg
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pgdata
+      containers:
+        - name: postgres
+          image: postgres:14
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          envFrom:
+            - configMapRef:
+                name: pg-cfg
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /data
+              name: data
